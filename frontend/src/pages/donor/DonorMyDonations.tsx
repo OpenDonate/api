@@ -124,4 +124,11 @@ const charities = {
   }
 };
 
+const merchants = {
+  MCDONALDS: {
+    id: "MCDONALDS",
+    name: "McDonalds",
+  }
+};
+
 export default DonorMyDonations;
