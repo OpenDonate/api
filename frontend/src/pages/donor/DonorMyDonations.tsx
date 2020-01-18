@@ -70,7 +70,7 @@ const DonorMyDonations: React.FC = () => {
 
   return (
     <div style={{width: '100%'}}>
-      <h1>My donations</h1>
+      <h1 style={{fontFamily: 'Georgia, Times, "Times New Roman", serif', color: '#333333'}}>My donations</h1>
       <div style={{overflowY: 'scroll', height: '80%'}}>
       {isLoading ? (
         <div style={{display: 'flex', flexDirection: 'column',}}>

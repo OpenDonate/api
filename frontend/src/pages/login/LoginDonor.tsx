@@ -22,7 +22,7 @@ const LoginDonor: React.FC = () => {
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', padding: 40, color: '#444444'}}>
 
           <div>
-            <h1>Gain control of your donations</h1>
+            <h1 style={{fontFamily: 'Georgia, Times, "Times New Roman", serif'}}>Gain control of your donations</h1>
             <div style={{color: '#888888'}}>
               - View your past donations<br />
               - Choose which benificiary you prefer to donate to

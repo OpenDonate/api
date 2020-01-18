@@ -16,7 +16,7 @@ const DonorRouter: React.FC = () => {
   return (
     <div style={{display: 'flex', height: '100vh', width: '100vw'}}>
       {/*// Side Nav*/}
-      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: 200, paddingLeft: 150}}>
+      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: 300, paddingLeft: 100}}>
         <Link to={`/donors/${donorId}/donations`}
               style={{padding: 20, color: location.pathname.split('/')[3] === 'donations' ? '#444444' : '#999999', textDecoration: 'none', fontWeight: 'bold', fontSize: 20}}>
           My Donations
