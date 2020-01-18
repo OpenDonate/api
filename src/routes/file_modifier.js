@@ -16,6 +16,11 @@ const delete_file = (fileName) => fs.unlink(fileName,
 	if (err) throw err;
 });
 
+const copy_file = (src, dest) => fs.copyFile(src, dest,
+	(err) => {
+	if (err) throw err;
+});
+
 const count_file_lines = (fileName) => {
 	let count = 0
 	try {
@@ -24,14 +29,16 @@ const count_file_lines = (fileName) => {
 	} catch (err) {
 		return -1
 	}
-}
+};
+
 
 module.exports = {
 	new_file,
 	append_to_file,
 	delete_file,
 	count_file_lines,
-}
+	copy_file
+};
 
 
 
