@@ -10,11 +10,16 @@ const DonorDashboard: React.FC = () => {
 
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw'}}>
-      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', height: '50vh', width: '50vw'}}>
-        <p>Enter your email {donorId}</p>
-        <input type="email" />
-        <button>Login</button>
+    <div style={{display: 'flex', height: '100vh', width: '100vw'}}>
+      {/*// Side Nav*/}
+      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: 300}}>
+        <Link to="/donors/:id/donations" style={{padding: 20, color: '#444444', textDecoration: 'none', fontWeight: 'bold', fontSize: 20,}}>My Donations</Link>
+        <Link to="/donors/:id/settings" style={{padding: 20, color: '#444444', textDecoration: 'none', fontWeight: 'bold', fontSize: 20,}}>Settings</Link>
+      </div>
+      <div style={{display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <p>Your recent donations{donorId}</p>
+          <input type="email" />
+          <button>Login</button>
       </div>
     </div>
   );
