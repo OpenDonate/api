@@ -8,7 +8,7 @@ const Login: React.FC = () => {
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw'}}>
       <div style={{display: 'flex', justifyContent: 'space-around', height: '80vh', width: '80vw'}}>
-        <Link to='/login/donor' style={{flex: 1, margin: '20px', color: '#444444', textDecoration: 'none'}}>
+        <Link to='/login/donors' style={{flex: 1, margin: '20px', color: '#444444', textDecoration: 'none'}}>
           <img src="/donor.jpg" style={{height: '70%', width: '100%', objectFit: 'cover', borderRadius: '10px'}} />
           <h1>Donors</h1>
           <p>For people like you and I who want to vote with our wallets</p>
