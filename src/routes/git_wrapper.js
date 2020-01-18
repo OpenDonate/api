@@ -14,7 +14,7 @@ const push_block = async (fileName) => {
         console.log(process.cwd())
         await Git.add('gitchain')
         console.log("added")
-        //await Git.commit("Adding Block")
+        await Git.commit("Adding Block")
         console.log("committed")
         //await Git.push('origin','master')
 
