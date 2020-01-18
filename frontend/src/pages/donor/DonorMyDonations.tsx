@@ -116,4 +116,12 @@ const DonorMyDonations: React.FC = () => {
   );
 };
 
+const charities = {
+  WWF: {
+    id: "WWF",
+    name: "World Worldlife Foundation",
+    logoUrl: "https://justcreative.com/wp-content/uploads/2016/06/wwf-logo.jpg",
+  }
+};
+
 export default DonorMyDonations;
