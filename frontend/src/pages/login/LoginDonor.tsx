@@ -23,6 +23,6 @@ const LoginDonor: React.FC = () => {
         </div>
     </div>
   );
-}
+};
 
 export default LoginDonor;

@@ -10,17 +10,17 @@ const Login: React.FC = () => {
       <div style={{display: 'flex', justifyContent: 'space-around', height: '80vh', width: '80vw'}}>
         <Link to='/login/donor' style={{flex: 1, margin: '20px', color: '#444444', textDecoration: 'none'}}>
           <img src="/donor.jpg" style={{height: '70%', width: '100%', objectFit: 'cover', borderRadius: '10px'}} />
-          <h1>Donor</h1>
-          <p>For donors who want to vote with their wallets</p>
+          <h1>Donors</h1>
+          <p>For people like you and I who want to vote with our wallets</p>
         </Link>
         <Link to='/login/merchant' style={{flex: 1, margin: '20px', color: '#444444', textDecoration: 'none'}}>
           <img src="/merchant.jpg" style={{height: '70%', width: '100%', objectFit: 'cover', borderRadius: '10px'}} />
-          <h1>Merchant</h1>
+          <h1>Merchants</h1>
           <p>Simple, transparent APIs for your business</p>
         </Link>
         <Link to='/login/charity' style={{flex: 1, margin: '20px', color: '#444444', textDecoration: 'none'}}>
           <img src="/charity.jpg" style={{height: '70%', width: '100%', objectFit: 'cover', borderRadius: '10px'}} />
-          <h1>Charity</h1>
+          <h1>Charities</h1>
           <p>For non-profits looking for donations</p>
         </Link>
       </div>
