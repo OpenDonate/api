@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import Login from './pages/login/Login';
 import LoginDonor from "./pages/login/LoginDonor";
+import DonorDashboard from "./pages/donor/DonorDashboard";
 
 const App: React.FC = () => {
   return (
@@ -21,11 +22,11 @@ const App: React.FC = () => {
           <Route exact path='/login'>
             <Login />
           </Route>
-          <Route path='/login/donor'>
+          <Route exact path='/login/donor'>
             <LoginDonor />
           </Route>
-          <Route path='/donor/:donorId/dashboard'>
-            <div>dashboard</div>
+          <Route exact path='/donor/:donorId/dashboard'>
+            <DonorDashboard />
           </Route>
         </Switch>
       </Router>
