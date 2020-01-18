@@ -31,7 +31,6 @@ const count_file_lines = (fileName) => {
 	}
 };
 
-
 module.exports = {
 	new_file,
 	append_to_file,

@@ -14,14 +14,14 @@ let merch_donate_handler = async (req, res) => {
 		console.log("File does not exist")
 		fs.new_file(fileName)
 		fs.append_to_file(fileName, transaction)
-	} else if(numLines == 10) {
+	} else if(numLines == 5) {
 		// Commit file
 		await gitchain.push_block(fileName);
-		fs.delete_file(fileName);
-	} else if(numLines == 9) {
+		//fs.delete_file(fileName);
+	} else if(numLines == 4) {
 		fs.append_to_file(fileName, transaction)
 		await gitchain.push_block(fileName);
-		fs.delete_file(fileName);
+		//fs.delete_file(fileName);
 	} else {
 		fs.append_to_file(fileName, transaction)
 	}
