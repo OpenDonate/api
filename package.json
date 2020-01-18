@@ -13,6 +13,7 @@
     "express-subdomain": "^1.0.5",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "node-git": "^0.0.0"
   }
 }
