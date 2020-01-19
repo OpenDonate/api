@@ -119,8 +119,28 @@ const DonorMyDonations: React.FC = () => {
 const charities = {
   WWF: {
     id: "WWF",
-    name: "World Worldlife Foundation",
+    name: "World Wildlife Foundation",
     logoUrl: "https://justcreative.com/wp-content/uploads/2016/06/wwf-logo.jpg",
+  },
+  TSA: {
+    id: "TSA",
+    name: "The Salvation Army",
+    logoUrl: "http://public.crunchbase.com/t_api_images/v1401248909/zcte9nevwkaxhyanjskv.jpg",
+  },
+  UNICEF: {
+    id: "UNICEF",
+    name: "Unicef",
+    logoUrl: "https://i0.wp.com/www.middleeastmonitor.com/wp-content/uploads/2018/01/UPLOADS.jpg?resize=1200%2C800&quality=85&strip=all&ssl=1",
+  },
+  NKF: {
+    id: "NKF",
+    name: "National Kidney Foundation",
+    logoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzDAvDocnBCN3lwbEcbKa5xkKR9NeSnpWD44eoqfcbnVswuDh68A&s",
+  },
+  AWF: {
+    id: "AWF",
+    name: "African Wildlife Foundation",
+    logoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTijQcXKJnTp-W9_oIYikOU_2jiRBhrbzldZFx0klx0WZAfIyu_YA&s",
   }
 };
 
@@ -128,6 +148,22 @@ const merchants = {
   MCDONALDS: {
     id: "MCDONALDS",
     name: "McDonalds",
+  },
+  G2000: {
+    id: "G2000",
+    name: "G2000",
+  },
+  POKKA: {
+    id: "POKKA",
+    name: "Pokka",
+  },
+  STARBUCKS: {
+    id: "STARBUCKS",
+    name: "Starbucks",
+  },
+  NIKE: {
+    id: "NIKE",
+    name: "Nike",
   }
 };
 
