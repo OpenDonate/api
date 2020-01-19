@@ -18,7 +18,7 @@ const push_block = async (fileName) => {
     try {
         await Git.clone(chain_url, 'gitchain');
         await process.chdir(appRoot + "/gitchain");
-        await fs.copy_file(appRoot + '/' + fileName, process.cwd() + '/' + fileHash);
+        await fs.copy_file(appRoot + '/' + fileName, process.cwd() + '/blocks/' + fileHash);
         await Git.cwd(appRoot + "/gitchain");
         await Git.add('.');
         console.log("added");

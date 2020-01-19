@@ -13,22 +13,22 @@ const axios = require('axios');
 const csvParse = require('csv-parse/lib/sync');
 
 interface ITransaction {
-  charityId: string;
-  sellerId?: string;
-  donatedBy?: string;
+  donor: string;
+  merchant: string;
+  charity: string;
   amount: number;
-  createdOn: string;
+  timestamp: string;
 }
-
-const tempTransactions = `
-charityId,sellerId,donatedBy,amount,createdOn
-charityId,sellerId,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,amount,createdOn
-WWF,Mcdonalds,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,1000,date
-Cancer foundation,Business inc,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,2000,date
-Really good charity,My businesss,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,3000,date
-WWF,Fake business,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,4000,date
-Dolphin savers,Business that wants to steal yo money,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,5000,date
-`;
+//
+// const tempTransactions = `
+// charityId,sellerId,donatedBy,amount,createdOn
+// charityId,sellerId,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,amount,createdOn
+// WWF,Mcdonalds,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,1000,date
+// Cancer foundation,Business inc,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,2000,date
+// Really good charity,My businesss,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,3000,date
+// WWF,Fake business,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,4000,date
+// Dolphin savers,Business that wants to steal yo money,5cd8955d1e2348c4fb2dd036a0dc757595260f0699dd1ea316349f904f1d00a2,5000,date
+// `;
 
 const DonorMyDonations: React.FC = () => {
   const { donorId } = useParams();
@@ -44,26 +44,55 @@ const DonorMyDonations: React.FC = () => {
     setIsLoading(true);
 
     // Fetch the list of hashes of blocks that this user is involved in
-    const response: any = await axios.get('https://raw.githubusercontent.com/zameschua/zameschua.github.io/master/index.html');
-    const fileContents: string = response.data;
-    let blockHashes: string[] = fileContents.split('\n');
-    blockHashes = blockHashes.reverse(); // Latest transactions first
+    // const response: any = await axios.get('https://raw.githubusercontent.com/zameschua/zameschua.github.io/master/index.html');
+    // const fileContents: string = response.data;
+    // let blockHashes: string[] = fileContents.split('\n');
+    // blockHashes = blockHashes.reverse(); // Latest transactions first
+    //
+    // const allTransactions: ITransaction[] = [];
+    //
+    // for (let hash of blockHashes) {
+    //   //const response: any = await axios.get('https://raw.githubusercontent.com/Azure-Samples/AnomalyDetector/master/example-data/request-data.csv');
+    //   //const fileContents: string = response.data;
+    //   const fileContents = tempTransactions;
+    //   const transactions: ITransaction[] = csvParse(fileContents, {
+    //     columns: true,
+    //     skip_empty_lines: true,
+    //   });
+    //   let myTransactions = transactions.filter((transaction: ITransaction) => transaction.donatedBy === donorId);
+    //   myTransactions = myTransactions.reverse();
+    //   const newAllTransactions = allTransactions.concat(myTransactions); // Latest transactions first
+    //   setDonations(newAllTransactions);
+    // }
 
-    const allTransactions: ITransaction[] = [];
+    // Hacky way to iterate through all the blocks
+    // Ideally we want to have a file for each user, then the user will retrieve only the files (blocks) that has their transactions
+    const fileBaseUrl = 'https://raw.githubusercontent.com/OpenDonate/gitchain/master/blocks';
+    const blockBaseUrl = 'https://api.github.com/repos/OpenDonate/gitchain/contents/blocks';
+    const response: any = await axios.get(blockBaseUrl);
+    const blockHashes: string[] = response.data.map((block: any) => block.name);
 
-    for (let hash of blockHashes) {
-      //const response: any = await axios.get('https://raw.githubusercontent.com/Azure-Samples/AnomalyDetector/master/example-data/request-data.csv');
-      //const fileContents: string = response.data;
-      const fileContents = tempTransactions;
-      const transactions: ITransaction[] = csvParse(fileContents, {
+    let allDonations: ITransaction[] = [];
+    for (let blockHash of blockHashes) {
+      console.log(blockBaseUrl + blockHash);
+      const response: any = await axios.get(`${fileBaseUrl}/${blockHash}`);
+      const fileContents: string = response.data;
+      const donations = csvParse(fileContents, {
         columns: true,
         skip_empty_lines: true,
       });
-      let myTransactions = transactions.filter((transaction: ITransaction) => transaction.donatedBy === donorId);
-      myTransactions = myTransactions.reverse();
-      const newAllTransactions = allTransactions.concat(myTransactions); // Latest transactions first
-      setDonations(newAllTransactions);
+      allDonations = allDonations.concat(donations);
     }
+
+    // Filter our donations
+    // And reverse the donations (most recent first)
+    allDonations = allDonations
+      .filter((donation: ITransaction) => (
+        donation.donor === donorId
+      ))
+      .reverse();
+
+    setDonations(allDonations);
 
     setIsLoading(false);
   }
@@ -94,13 +123,13 @@ const DonorMyDonations: React.FC = () => {
       {!isLoading && donations.length > 0 ? (
         donations.map((donation: ITransaction) => (
           <div style={{display: 'flex', flexDirection: 'row'}} key={Math.random()}>
-            <img src='https://justcreative.com/wp-content/uploads/2016/06/wwf-logo.jpg'
+            <img src={charities[donation.charity].logoUrl}
                  style={{height: 150, width: 150, objectFit: 'cover', borderRadius: 10}}/>
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: "space-evenly", padding: 30}}>
-              <span>{donation.charityId}</span>
+              <span>{charities[donation.charity].name}</span>
               <span>{numeral(donation.amount / 100).format(	'$0,0.00')}</span>
-                <span>{donation.sellerId}</span>
-              <span style={{color: '#888888'}}>Date: {donation.createdOn}</span>
+                <span>{merchants[donation.merchant].name}</span>
+              <span style={{color: '#888888'}}>Date: {new Date(donation.timestamp).toDateString()}</span>
             </div>
           </div>
         ))
@@ -116,7 +145,12 @@ const DonorMyDonations: React.FC = () => {
   );
 };
 
-const charities = {
+interface ICharities
+{
+  [key: string]: any;
+}
+
+const charities: ICharities = {
   WWF: {
     id: "WWF",
     name: "World Wildlife Foundation",
@@ -144,7 +178,12 @@ const charities = {
   }
 };
 
-const merchants = {
+interface IMerchants
+{
+  [key: string]: any;
+}
+
+const merchants: IMerchants = {
   MCDONALDS: {
     id: "MCDONALDS",
     name: "McDonalds",
