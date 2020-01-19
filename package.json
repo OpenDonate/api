@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "deploy": "cd frontend && yarn install && yarn build && cp -rf ./build/* ../src/public && cd .. && yarn install && pm2 npm run start"
+    "deploy": "cd frontend && npm run install && npm run build && cp -rf ./build/* ../src/public && cd .. && npm run install && pm2 npm run start"
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
