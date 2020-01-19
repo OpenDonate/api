@@ -67,14 +67,13 @@ const DonorMyDonations: React.FC = () => {
 
     // Hacky way to iterate through all the blocks
     // Ideally we want to have a file for each user, then the user will retrieve only the files (blocks) that has their transactions
-    const fileBaseUrl = 'https://raw.githubusercontent.com/OpenDonate/gitchain/master/blocks';
-    const blockBaseUrl = 'https://api.github.com/repos/OpenDonate/gitchain/contents/blocks';
+    const fileBaseUrl = 'https://raw.githubusercontent.com/OpenDonate/gitchain_dev/master/blocks';
+    const blockBaseUrl = 'https://api.github.com/repos/OpenDonate/gitchain_dev/contents/blocks';
     const response: any = await axios.get(blockBaseUrl);
     const blockHashes: string[] = response.data.map((block: any) => block.name);
 
     let allDonations: ITransaction[] = [];
     for (let blockHash of blockHashes) {
-      console.log(blockBaseUrl + blockHash);
       const response: any = await axios.get(`${fileBaseUrl}/${blockHash}`);
       const fileContents: string = response.data;
       const donations = csvParse(fileContents, {
@@ -129,7 +128,7 @@ const DonorMyDonations: React.FC = () => {
               <span>{charities[donation.charity].name}</span>
               <span>{numeral(donation.amount / 100).format(	'$0,0.00')}</span>
                 <span>{merchants[donation.merchant].name}</span>
-              <span style={{color: '#888888'}}>Date: {new Date(donation.timestamp).toDateString()}</span>
+              <span style={{color: '#888888'}}>Date: {new Date(donation.timestamp).toDateString()} {new Date(donation.timestamp).toTimeString()}</span>
             </div>
           </div>
         ))
